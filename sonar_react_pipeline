@@ -1,0 +1,40 @@
+pipeline {
+    agent any
+	
+    environment {
+        //PATH = "C:/apache-maven-3.8.6/bin"
+		PATH = "C:/WINDOWS/SYSTEM32"
+    }
+    stages{
+      stage('GetCode'){
+            steps{
+                 git url: 'https://github.com/wilfred2021-web/react-app-frontend.git',branch: 'master'
+                 }
+            }
+       
+	   stage('SonarQube analysis'){
+            steps{
+			  script{
+			   nodejs(nodeJSInstallationName: 'nodejs19.1.0'){
+			      bat 'npm install'
+				  withSonarQubeEnv('sonarqube 8.9.10'){
+					bat 'npm install sonarqube-scanner --save-dev'
+					bat 'npm run sonar'
+                }
+               }   
+              }			  
+            }
+		
+        }
+		
+		stage("Quality Gate") {
+            steps {
+              timeout(time: 1, unit: 'HOURS') {
+                waitForQualityGate abortPipeline: true
+              }
+            }
+        }
+		
+		
+   }	
+}
