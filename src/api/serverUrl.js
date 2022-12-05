@@ -1,1 +1,1 @@
-export default "<YOUR_API_URL>";
+export default "http://44.204.6.103:8081";
