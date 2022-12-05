@@ -59,7 +59,7 @@
       command: sudo npm install express
     - name: Install React JS package
       command: npm install -g create-react-app
-    - name: Install react-dependencies and start
+    - name: Install react-dependencies
       command: npm i react-scripts build
     # Install all the necessary Node modules for the project,using `npm`.
     # Install all the necessary Node modules for the project, using `npm`.
