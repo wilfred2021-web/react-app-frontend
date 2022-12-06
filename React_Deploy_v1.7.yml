@@ -5,8 +5,7 @@
   become: True
   vars:
     repo_path: nrbaskar/hariapp:{{DOCKER_TAG}}
-    dest_path: /home/ec2-user/{{DOCKER_TAG}}
-    
+    dest_path: /home/ec2-user/{{DOCKER_TAG}}    
   tasks:
      # Install python pip
     - name: Install python pip
