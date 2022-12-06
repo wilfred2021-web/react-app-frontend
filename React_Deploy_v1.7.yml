@@ -62,12 +62,11 @@
     - name: Install react-dependencies
       command: npm i react-scripts build
     # Install all the necessary Node modules for the project,using `npm`.
-    # Install all the necessary Node modules for the project, using `npm`.
-    - name: Install project npm dependencies
       command: npm install
       args:
         chdir: "{{ dest_path }}"
-    - name: Start service for npm
-      command: npm start ./src/components/App.js --name "{{DOCKER_TAG}}"
+    - name: Start service
+      command: npm start ./server/app.js --name "{{DOCKER_TAG}}"
       args:
-        chdir: "{{ dest_path }}"
+        chdir: "{{ dest_path }}" 
+      		
