@@ -68,5 +68,4 @@
     - name: Start service
       command: npm start ./server/app.js --name "{{DOCKER_TAG}}"
       args:
-        chdir: "{{ dest_path }}" 
-      		
+        chdir: "{{ dest_path }}"
