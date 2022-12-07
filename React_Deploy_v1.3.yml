@@ -1,0 +1,75 @@
+---
+- name: Staging server Deployment
+  hosts: stageserver
+  become_user: root
+  become: True
+  vars:
+    repo_path: nrbaskar/hariapp:{{DOCKER_TAG}}
+    dest_path: /home/ec2-user/{{DOCKER_TAG}}
+    
+  tasks:
+     # Install python pip
+    - name: Install python pip
+      yum:
+        name: python-pip
+        state: present
+    # Install docker service 
+    - name: Install docker
+      yum:
+        name: docker
+        state: present
+    # Start the docker service
+    - name: start docker
+      service:
+        name: docker
+        state: started
+        enabled: yes
+    # Install docker-python Module
+    - name: Install docker-py python module
+      pip:
+        name: docker-py
+        state: present
+    #Pull Docker Image    
+    - name: Pull docker image
+      docker_image:
+        name: nrbaskar/hariapp
+        tag: "{{DOCKER_TAG}}"
+        source: pull
+    #Create a Directory
+    - name: create directory
+      file:
+        state: directory
+        dest: "{{ dest_path }}"
+    #Copy Files
+    - name: Copy website to the host
+      copy:
+        src: ./
+        dest: "{{ dest_path }}"
+    # Install NodeJS library
+    # using multiple shell commands
+    - name: Install Nodejs & ExpressJS
+      shell: 'curl --silent --location https://rpm.nodesource.com/setup_16.x | bash -'
+    # If other package are required mention the package name in "name"
+    # eg: ngix, curl, wget, apache2, nodejs
+    - name: Install reqired packages
+      yum:
+        name: nodejs
+        state: present
+    - name: Install Expressjs
+      command: sudo npm install express
+    - name: install and start nginx
+      yum:
+        name: nginx
+        state: latest
+    - name: start nginx
+      service:
+        name: nginx
+        state: started
+    - name: Install React JS package
+      command: npm install -g create-react-app
+    - name: Install react-dependencies
+      command: npm i react-scripts build
+    # Install all the necessary Node modules for the project,using `npm`.
+      command: npm install
+      args:
+        chdir: "{{ dest_path }}" 
