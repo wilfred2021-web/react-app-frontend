@@ -58,7 +58,7 @@ class CourseList extends React.Component {
                 <TableHeaderColumn dataField="id" isKey hidden>Id</TableHeaderColumn>
                 
                 <TableHeaderColumn 
-                    dataField="title"
+                    dataField="title_SRE"
                     dataFormat={titleFormatter} 
                     dataSort={true}
                     caretRender={getCaret}
@@ -69,7 +69,7 @@ class CourseList extends React.Component {
                 </TableHeaderColumn>
 
                 <TableHeaderColumn 
-                    dataField="length"
+                    dataField="length_8081"
                     dataSort={true}
                     caretRender={getCaret}
                     columnTitle
@@ -78,7 +78,7 @@ class CourseList extends React.Component {
                 </TableHeaderColumn>
 
                 <TableHeaderColumn 
-                    dataField="category"
+                    dataField="category_Devops"
                     dataSort={true}
                     caretRender={getCaret}
                     filter={{type: 'TextFilter', delay: 0 }}
