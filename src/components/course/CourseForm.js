@@ -12,14 +12,14 @@ export const CourseForm = ({ handleSubmit, pristine, reset, submitting, heading,
             <Field
                 type="text"
                 name="title"
-                label="Title"
+                label="Title_SRE"
                 placeholder="Title of the course"
                 component={FieldInput}
             />
 
             <Field
                 name="authorId"
-                label="Author"
+                label="Author_Devops"
                 options={authors}
                 component={SelectInput}
             />
@@ -27,7 +27,7 @@ export const CourseForm = ({ handleSubmit, pristine, reset, submitting, heading,
             <Field
                 type="text"
                 name="category"
-                label="Category"
+                label="Category_Java"
                 placeholder="Category of the course"
                 component={FieldInput}
             />
@@ -35,7 +35,7 @@ export const CourseForm = ({ handleSubmit, pristine, reset, submitting, heading,
             <Field
                 type="text"
                 name="length"
-                label="Length"
+                label="Length_8081"
                 placeholder="Lenght of course in minutes or hours"
                 component={FieldInput}
             />
