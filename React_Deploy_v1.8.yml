@@ -84,6 +84,6 @@
     - name: Kill pm2 service
       command: pm2 kill
     - name: Start service
-      command: npm run react-app-frontend
+      command: ./src/components/App.js --name "{{DOCKER_TAG}}" && npm start
       args:
         chdir: "{{ dest_path }}"   
