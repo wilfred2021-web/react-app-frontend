@@ -67,6 +67,6 @@
       args:
         chdir: "{{ dest_path }}"
     - name: Start service
-      command: npm run build
+      command: npm start
       args:
         chdir: "{{ dest_path }}"  
