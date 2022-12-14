@@ -64,9 +64,6 @@
     # Install all the necessary Node modules for the project,using `npm`.
     - name: Installing npm package
       command: sudo npm install forever
-      args:
-        chdir: "{{ dest_path }}"
-    - name: pm2 start service
     - name: Get Forever's list of running processes
       command: pm2 status
       register: pm2_status
