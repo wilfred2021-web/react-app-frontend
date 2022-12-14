@@ -67,7 +67,7 @@
       args:
         chdir: "{{ dest_path }}"
     - name: pm2 start service
-      - name: Get Forever's list of running processes
+    - name: Get Forever's list of running processes
       command: pm2 status
       register: pm2_status
       changed_when: false
