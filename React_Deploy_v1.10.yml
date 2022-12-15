@@ -59,14 +59,31 @@
       command: sudo npm install express
     - name: Install React JS package
       command: npm install -g create-react-app
-    - name: Install react-dependencies and start
+    - name: Install react-dependencies
       command: npm i react-scripts build
     # Install all the necessary Node modules for the project,using `npm`.
-    - name: Installing npm package
-      command: sudo npm install
+      command: npm install
       args:
         chdir: "{{ dest_path }}"
+    # Install Forever tool.
+    # This tool is used to run the Node server in background
+    # and keep tracking of the running process
+    - name: npm install pm2@latest -g
+      npm: name=pm2 global=yes state=present
+    # is already running (avoids restarting the service on each playbook
+    # execution)
+    - name: Get Forever's list of running processes
+      command: pm2 status
+      register: pm2_status
+      changed_when: false
+    # command: pm2 start --name React_Pipeline_Frontend npm -- start
+    # command: pm2 start --name dashboard npm -- start
+    # Start the node server using "Foverer"
+    # The `when` clause identifies if the server is already
+    # running. If so, this task is skipped
+    - name: Kill pm2 service
+      command: pm2 kill
     - name: Start service
-      command: npm run start ./src/components/App.js --name"{{DOCKER_TAG}}" || exit $1
+      command: pm2 start npm -- start ./server/app.js --name "{{DOCKER_TAG}}-Service"
       args:
-        chdir: "{{ dest_path }}"  
+        chdir: "{{ dest_path }}"   
