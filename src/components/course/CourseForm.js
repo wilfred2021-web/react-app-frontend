@@ -35,7 +35,7 @@ export const CourseForm = ({ handleSubmit, pristine, reset, submitting, heading,
             <Field
                 type="text"
                 name="length"
-                label="Length_Om NamaSIvaya"
+                label="Length_Course In Minutes or Hours"
                 placeholder="Lenght of course in minutes or hours"
                 component={FieldInput}
             />
