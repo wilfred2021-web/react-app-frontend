@@ -27,7 +27,7 @@ export const CourseForm = ({ handleSubmit, pristine, reset, submitting, heading,
             <Field
                 type="text"
                 name="category"
-                label="Category_Java"
+                label="Category_ReactJs Frontend App"
                 placeholder="Category of the course"
                 component={FieldInput}
             />
@@ -35,7 +35,7 @@ export const CourseForm = ({ handleSubmit, pristine, reset, submitting, heading,
             <Field
                 type="text"
                 name="length"
-                label="Length_8081"
+                label="Length_Om NamaSIvaya"
                 placeholder="Lenght of course in minutes or hours"
                 component={FieldInput}
             />
