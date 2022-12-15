@@ -4,7 +4,7 @@
   become_user: root
   become: True
   vars:
-    repo_path: nrbaskar/Reactjs:{{DOCKER_TAG}}
+    repo_path: nrbaskar/reactjs:{{DOCKER_TAG}}
     dest_path: /home/ec2-user/{{DOCKER_TAG}}
     
   tasks:
@@ -32,7 +32,7 @@
     #Pull Docker Image    
     - name: Pull docker image
       docker_image:
-        name: nrbaskar/Reactjs
+        name: nrbaskar/reactjs
         tag: "{{DOCKER_TAG}}"
         source: pull
     #Create a Directory
