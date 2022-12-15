@@ -12,7 +12,7 @@ export const CourseForm = ({ handleSubmit, pristine, reset, submitting, heading,
             <Field
                 type="text"
                 name="title"
-                label="Title_Lokesh_SRE"
+                label="Title_Automatic Code Deployment"
                 placeholder="Title of the course"
                 component={FieldInput}
             />
