@@ -12,7 +12,7 @@ export const CourseForm = ({ handleSubmit, pristine, reset, submitting, heading,
             <Field
                 type="text"
                 name="title"
-                label="Om_Automatic Code Deployment"
+                label="Om Sivam_Automatic Code Deployment"
                 placeholder="Title of the course"
                 component={FieldInput}
             />
