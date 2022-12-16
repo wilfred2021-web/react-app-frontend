@@ -4,10 +4,11 @@
   become_user: root
   become: True
   vars:
-    repo_path: nrbaskar/angularjsap:{{DOCKER_TAG}}
+    repo_path: nrbaskar/Reactjs:{{DOCKER_TAG}}
     dest_path: /home/ec2-user/{{DOCKER_TAG}}
+    
   tasks:
-    # Install python pip
+     # Install python pip
     - name: Install python pip
       yum:
         name: python-pip
@@ -28,26 +29,25 @@
       pip:
         name: docker-py
         state: present
-    # Pull Docker Image    
+    #Pull Docker Image    
     - name: Pull docker image
       docker_image:
-        name: nrbaskar/angularjsap
+        name: nrbaskar/Reactjs
         tag: "{{DOCKER_TAG}}"
         source: pull
+    #Create a Directory
     - name: create directory
       file:
         state: directory
         dest: "{{ dest_path }}"
-    # Copy Files
+    #Copy Files
     - name: Copy website to the host
       copy:
         src: ./
         dest: "{{ dest_path }}"
-    # update the system package
-      Command: sudo apt-get upgrade && sudo apt-get update -y
     # Install NodeJS library
     # using multiple shell commands
-    - name: Install Nodejs & AngularJS
+    - name: Install Nodejs & ExpressJS
       shell: 'curl --silent --location https://rpm.nodesource.com/setup_16.x | bash -'
     # If other package are required mention the package name in "name"
     # eg: ngix, curl, wget, apache2, nodejs
@@ -55,21 +55,20 @@
       yum:
         name: nodejs
         state: present
+    - name: Install Expressjs
+      command: sudo npm install express
+    - name: Install React JS package
+      command: npm install -g create-react-app
+    - name: Install react-dependencies
+      command: npm i react-scripts build
     # Install all the necessary Node modules for the project,using `npm`.
-    - name: Install project dependencies
-      yum:
-        name: npm
-        state: present
+      command: npm install
       args:
         chdir: "{{ dest_path }}"
     # Install Forever tool.
-    # Install Angular CLI Using NPM
-      command: sudo npm install -g @angular/cli
-    # Install Angular CLI Using NPM
-      command: npm install -g gulp
     # This tool is used to run the Node server in background
     # and keep tracking of the running process
-    - name: Install PM2
+    - name: npm install pm2@latest -g
       npm: name=pm2 global=yes state=present
     # is already running (avoids restarting the service on each playbook
     # execution)
@@ -77,6 +76,8 @@
       command: pm2 status
       register: pm2_status
       changed_when: false
+    # command: pm2 start --name React_Pipeline_Frontend npm -- start
+    # command: pm2 start --name dashboard npm -- start
     # Start the node server using "Foverer"
     # The `when` clause identifies if the server is already
     # running. If so, this task is skipped
