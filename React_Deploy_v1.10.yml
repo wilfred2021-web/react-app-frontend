@@ -32,7 +32,7 @@
     #Pull Docker Image    
     - name: Pull docker image
       docker_image:
-        name: nrbaskar/Reactjs
+        name: nrbaskar/reactjs
         tag: "{{DOCKER_TAG}}"
         source: pull
     #Create a Directory
