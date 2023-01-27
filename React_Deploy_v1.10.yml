@@ -4,7 +4,7 @@
   become_user: root
   become: True
   vars:
-    repo_path: nrbaskar/Reactjs:{{DOCKER_TAG}}
+    repo_path: nrbaskar/reactjs:{{DOCKER_TAG}}
     dest_path: /home/ec2-user/{{DOCKER_TAG}}
     
   tasks:
