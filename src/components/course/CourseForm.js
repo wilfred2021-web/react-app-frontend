@@ -12,14 +12,14 @@ export const CourseForm = ({ handleSubmit, pristine, reset, submitting, heading,
             <Field
                 type="text"
                 name="title"
-                label="ReactJs Automatic Code Deployment Successfully On 27Jan2023"
+                label="ReactJs Automatic Code Deployment Successfully On 02Feb2023"
                 placeholder="Title of the course"
                 component={FieldInput}
             />
 
             <Field
                 name="authorId"
-                label="Author_Mr.Joseph Praveen Kota"
+                label="Author_Schin Tendulkar"
                 options={authors}
                 component={SelectInput}
             />
@@ -27,7 +27,7 @@ export const CourseForm = ({ handleSubmit, pristine, reset, submitting, heading,
             <Field
                 type="text"
                 name="category"
-                label="Category_ReactJs Frontend Application"
+                label="Category_Cricket"
                 placeholder="Category of the course"
                 component={FieldInput}
             />
