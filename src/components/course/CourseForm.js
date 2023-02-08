@@ -12,14 +12,14 @@ export const CourseForm = ({ handleSubmit, pristine, reset, submitting, heading,
             <Field
                 type="text"
                 name="title"
-                label="ReactJs Automatic Code Deployment Successfully On 02Feb2023"
+                label="ReactJs Automatic Code Deployment Successfully On 08Feb2023"
                 placeholder="Title of the course"
                 component={FieldInput}
             />
 
             <Field
                 name="authorId"
-                label="Author_Schin Tendulkar"
+                label="Author_God Of Cricket"
                 options={authors}
                 component={SelectInput}
             />
