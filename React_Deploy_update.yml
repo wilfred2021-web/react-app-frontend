@@ -66,6 +66,6 @@
       args:
         chdir: "{{ dest_path }}"
     - name: Start service
-      command: npm start npm -- start ./server/app.js --name "{{DOCKER_TAG}}-Service"
+      command: pm2 start npm -- start ./server/app.js --name "{{DOCKER_TAG}}-Service"
       args:
         chdir: "{{ dest_path }}"
