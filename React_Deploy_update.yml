@@ -65,6 +65,15 @@
       command: npm install
       args:
         chdir: "{{ dest_path }}"
+    # Install Forever tool.
+    # This tool is used to run the Node server in background
+    # and keep tracking of the running process
+    - name: npm install pm2@latest -g
+      npm: name=pm2 global=yes state=present
+    # is already running (avoids restarting the service on each playbook
+    # execution)
+    - name: Kill pm2 service
+      command: pm2 kill
     - name: Start service
       command: pm2 start npm -- start ./server/app.js --name "{{DOCKER_TAG}}-Service"
       args:
