@@ -40,11 +40,8 @@
       file:
         state: directory
         dest: "{{ dest_path }}"
-    #Copy Files
-    - name: Copy website to the host
-      copy:
-        src: ./
-        dest: "{{ dest_path }}"
+    - name: Copy Files
+      shell: 'cd "{{ dest_path }}" && aws s3 cp s3://node555-s3bucket/S3Zip_Bucket.zip .'
     # Install NodeJS library
     # using multiple shell commands
     - name: Install Nodejs & ExpressJS
