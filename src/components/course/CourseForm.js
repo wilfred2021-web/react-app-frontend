@@ -12,7 +12,7 @@ export const CourseForm = ({ handleSubmit, pristine, reset, submitting, heading,
             <Field
                 type="text"
                 name="title"
-                label="Sachin"
+                label="Sachin Tendulkar"
                 placeholder="Title of the course"
                 component={FieldInput}
             />
