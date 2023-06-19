@@ -31,7 +31,7 @@
 
     - name: Pull docker image
       docker_image:
-        name: "{{ repo_path }}"
+        name: nrbaskar/react
         tag: "{{ DOCKER_TAG }}"
         source: pull
 
