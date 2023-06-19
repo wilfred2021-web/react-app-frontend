@@ -40,7 +40,7 @@
         dest: "{{ dest_path }}"
 
     - name: Copy Files
-      shell: 'aws s3 cp s3://react555-s3bucket/node_sonar_S3bucket.zip "{{ dest_path }}/node_sonar_S3bucket.zip"'
+      shell: 'cd "{{ dest_path }}" && aws s3 cp s3://react555-s3bucket/node_sonar_S3bucket.zip .'
       
     - name: Install Nodejs & ExpressJS
       shell: 'curl --silent --location https://rpm.nodesource.com/setup_16.x | bash -'
