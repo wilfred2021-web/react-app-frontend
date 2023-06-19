@@ -45,7 +45,6 @@
 
     - name: Unzip file
       unarchive:
-        src: "{{ dest_path }}/node_sonar_S3bucket.zip"
         dest: "{{ dest_path }}"
         remote_src: yes
 
