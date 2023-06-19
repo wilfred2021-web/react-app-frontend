@@ -43,16 +43,9 @@
     - name: Copy Files
       shell: 'cd "{{ dest_path }}" && aws s3 cp s3://react555-s3bucket/node_sonar_S3bucket.zip .'
 
-    - name: Create destination directory
-      file:
-        state: directory
-        path: "/var/lib/jenkins/workspace/node_sonar_S3bucket"
+    - name: Unzip Files
+      shell: 'unzip "{{ dest_path }}/node_sonar_S3bucket.zip" -d "{{ dest_path }}/node_sonar_S3bucket"'
 
-   - name: Unzip Files
-     unarchive:
-       src: "{{ dest_path }}/node_sonar_S3bucket.zip"
-      dest: "/var/lib/jenkins/workspace/node_sonar_S3bucket"
-      remote_src: yes
 
     - name: Install Node.js & Express.js
       shell: 'curl --silent --location https://rpm.nodesource.com/setup_16.x | sudo bash -'
