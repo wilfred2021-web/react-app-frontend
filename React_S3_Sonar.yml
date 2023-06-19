@@ -43,8 +43,10 @@
     - name: Copy Files
       shell: 'aws s3 cp s3://react555-s3bucket/node_sonar_S3bucket.zip "{{ dest_path }}/node_sonar_S3bucket.zip"'
 
-    - name: Unzip Files
-      shell: 'unzip "{{ dest_path }}/node_sonar_S3bucket.zip"'
+     - name: Unzip file
+       command: unzip
+       args:
+        chdir: "{{ dest_path }}"
 
     - name: Install Nodejs & ExpressJS
       shell: 'curl --silent --location https://rpm.nodesource.com/setup_16.x | bash -'
@@ -63,12 +65,12 @@
     - name: Install react-dependencies
       command: npm i react-scripts build
       args:
-        chdir: "{{ dest_path }}/node_sonar_S3bucket"
+        chdir: "{{ dest_path }}"
 
     - name: Install all necessary Node modules
       command: npm install
       args:
-        chdir: "{{ dest_path }}/node_sonar_S3bucket"
+        chdir: "{{ dest_path }}"
 
     - name: Install pm2
       npm:
@@ -87,4 +89,4 @@
     - name: Start service
       command: pm2 start npm -- start ./server/app.js --name "{{ DOCKER_TAG }}-Service"
       args:
-        chdir: "{{ dest_path }}/node_sonar_S3bucket"
+        chdir: "{{ dest_path }}"
