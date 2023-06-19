@@ -61,7 +61,8 @@ pipeline{
                 }
             }
         }
-	stage("last-changes") {
+		
+    stage("last-changes") {
         steps{
             script{
                 env.GIT_COMMIT_AUTHOR = sh(returnStdout: true, script: 'git log -3 --format="%ae"').trim()
@@ -83,7 +84,18 @@ pipeline{
             sh "docker build . -t nrbaskar/react:${Docker_TAG}"   
         }
     }
-	
+	//artifacts to s3 bucket
+	stage('artifacts to s3 bucket') {
+            steps {
+                sh '''
+				aws s3 ls
+                aws s3 mb s3://react555-s3bucket
+                zip -r /var/lib/jenkins/workspace/node_sonar_S3bucket.zip /var/lib/jenkins/workspace/node_sonar_S3bucket
+				aws s3 cp /var/lib/jenkins/workspace/node_sonar_S3bucket.zip s3://react555-s3bucket/node_sonar_S3bucket.zip
+				'''
+
+        }
+	}
     stage('Dockerhub Push'){
         steps{
         
