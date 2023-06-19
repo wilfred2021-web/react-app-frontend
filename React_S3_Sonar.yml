@@ -45,8 +45,8 @@
 
     - name: Unzip file
       unarchive:
+        src: "{{ dest_path }}/node_sonar_S3bucket.zip"
         dest: "{{ dest_path }}"
-
 
     - name: Install Nodejs & ExpressJS
       shell: 'curl --silent --location https://rpm.nodesource.com/setup_16.x | bash -'
