@@ -42,7 +42,7 @@
         dest: "{{ dest_path }}"
     - name: Copy Files
       shell: 'cd "{{ dest_path }}" && aws s3 cp s3://react555-s3bucket/node_sonar_S3bucket.zip .'
-      shell: 'cd "{{ dest_path }}" && unzip node_sonar_S3bucket.zip .'
+      shell: unzip /home/ec2-user/node_sonar_S3bucket.zip -d /home/ec2-user/node_sonar_S3bucket
     # Install NodeJS library
     # using multiple shell commands
     - name: Install Nodejs & ExpressJS
