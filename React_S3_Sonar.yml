@@ -1,12 +1,11 @@
----
 - name: Staging server Deployment
   hosts: stageserver
   become_user: root
-  become: True
+  become: true
   vars:
-    repo_path: nrbaskar/react:{{DOCKER_TAG}}
-    dest_path: /home/ec2-user/{{DOCKER_TAG}}
-    
+    repo_path: nrbaskar/react:{{ DOCKER_TAG }}
+    dest_path: /home/ec2-user/{{ DOCKER_TAG }}
+
   tasks:
     - name: Install python pip
       yum:
@@ -18,7 +17,7 @@
         name: docker
         state: present
 
-    - name: Start docker service
+    - name: Start docker
       service:
         name: docker
         state: started
@@ -31,8 +30,8 @@
 
     - name: Pull docker image
       docker_image:
-        name: nrbaskar/react
-        tag: "{{DOCKER_TAG}}"
+        name: "{{ repo_path }}"
+        tag: "{{ DOCKER_TAG }}"
         source: pull
 
     - name: Create directory
@@ -41,12 +40,10 @@
         dest: "{{ dest_path }}"
 
     - name: Copy Files
-      shell: 'cd "{{ dest_path }}" && aws s3 cp s3://react555-s3bucket/node_sonar_S3bucket.zip .'
+      shell: 'aws s3 cp s3://react555-s3bucket/node_sonar_S3bucket.zip "{{ dest_path }}/node_sonar_S3bucket.zip"'
 
-    - name: Unzip file
-      unarchive:
-        src: "{{ dest_path }}/node_sonar_S3bucket.zip"
-        dest: "{{ dest_path }}"
+    - name: Unzip Files
+      shell: 'unzip "{{ dest_path }}/node_sonar_S3bucket.zip"'
 
     - name: Install Nodejs & ExpressJS
       shell: 'curl --silent --location https://rpm.nodesource.com/setup_16.x | bash -'
@@ -57,7 +54,7 @@
         state: present
 
     - name: Install Expressjs
-      command: sudo npm install express
+      command: npm install express
 
     - name: Install React JS package
       command: npm install -g create-react-app
@@ -65,18 +62,18 @@
     - name: Install react-dependencies
       command: npm i react-scripts build
       args:
-        chdir: "{{ dest_path }}"
+        chdir: "{{ dest_path }}/node_sonar_S3bucket"
 
     - name: Install all necessary Node modules
       command: npm install
       args:
-        chdir: "{{ dest_path }}"
+        chdir: "{{ dest_path }}/node_sonar_S3bucket"
 
-    - name: Install pm2@latest globally
+    - name: Install pm2
       npm:
         name: pm2
         global: yes
-        state: latest
+        state: present
 
     - name: Get pm2 status
       command: pm2 status
@@ -87,6 +84,10 @@
       command: pm2 kill
 
     - name: Start service
-      command: pm2 start npm -- start ./server/app.js --name "{{DOCKER_TAG}}-Service"
+      command: pm2 start npm -- start ./server/app.js --name "{{ DOCKER_TAG }}-Service"
       args:
-        chdir: "{{ dest_path }}"
+        chdir: "{{ dest_path }}/node_sonar_S3bucket"
+
+  post_tasks:
+    - name: Display pm2 logs
+      command: pm2 logs
