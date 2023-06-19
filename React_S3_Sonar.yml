@@ -43,8 +43,11 @@
     - name: Copy Files
       shell: 'cd "{{ dest_path }}" && aws s3 cp s3://react555-s3bucket/node_sonar_S3bucket.zip .'
     - name: Unzip Files
-      shell: 'unzip "{{ dest_path }}/node_sonar_S3bucket.zip" -d "{{ dest_path }}/node_sonar_S3bucket"'
-
+      unarchive:
+      src: "{{ dest_path }}/node_sonar_S3bucket.zip"
+      dest: "{{ dest_path }}/node_sonar_S3bucket"
+      remote_src: yes
+      creates: "{{ dest_path }}/node_sonar_S3bucket"
     # Install NodeJS library
     # using multiple shell commands
     - name: Install Nodejs & ExpressJS
