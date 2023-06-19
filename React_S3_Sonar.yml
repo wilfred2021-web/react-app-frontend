@@ -46,7 +46,7 @@
     - name: Unzip file
       unarchive:
         dest: "{{ dest_path }}"
-        remote_src: yes
+
 
     - name: Install Nodejs & ExpressJS
       shell: 'curl --silent --location https://rpm.nodesource.com/setup_16.x | bash -'
