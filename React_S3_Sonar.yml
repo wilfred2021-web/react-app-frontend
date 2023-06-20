@@ -85,4 +85,4 @@
     - name: Start service
       command: pm2 start npm -- start ./server/app.js --name "{{DOCKER_TAG}}-Service"
       args:
-        chdir: "{{ dest_path }}"
+        chdir: "{{ dest_path }}/node_sonar_S3bucket/var/lib/jenkins/workspace"
